@@ -14,6 +14,32 @@
 	int vId; // vehicle Id
 	//you can add more members here if required
 	//add member functions
+ public:
+	Service();
+	Service(char*,char*,float,Date,mTime,bool,float,int,int,int);
+	Service(const Service &);
+	void set_source(char*);
+	void set_destination(char*);
+	void set_distance(float);
+	void set_date(Date);
+	void set_time(mTime);
+	void set_status(bool);
+	void set_rate(float);
+	void set_cId(int);
+	void set_dId(int);
+	void set_vId(int);
+	char* get_source();
+	char* get_destination();
+	float get_distance();
+	Date get_date();
+	mTime get_time();
+	bool get_status();
+	float get_rate();
+	int get_cId();
+	int get_dId();
+	int get_vId();
+
+	~Service();
 };
 	class Ride:public Service 
 {
