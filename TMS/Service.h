@@ -38,7 +38,7 @@
 	int get_cId();
 	int get_dId();
 	int get_vId();
-
+	virtual void print()=0;
 	~Service();
 };
 	class Ride:public Service 
@@ -49,6 +49,15 @@
 	float VehicleRanking; // 0 to 5 scale (worst to best)
 	//you can add more members here if required
 	//add member functions
+ public:
+	Ride();
+	Ride(int,char*,float,float,char*,char*,float,Date,mTime,bool,float,int,int,int);
+	void set_passengers(int);
+	void set_type(char*);
+	void set_d_rank(float);
+	void set_v_rank(float);
+	void print();
+	~Ride();
 };
 	class Delivery:public Service 
 {
@@ -56,4 +65,12 @@
 	char* goodsType; //type of goods food, furniture, petroleum, chemicals, etc.
 	//you can add more members here if required
 	//add member functions
+ public:
+	Delivery();
+	Delivery(float,char*,char*,char*,float,Date,mTime,bool,float,int,int,int);
+	void set_g_weight(float);
+	void set_g_type(char*);
+	float get_g_weight();
+	char* get_g_type();
+	~Delivery();
 };
