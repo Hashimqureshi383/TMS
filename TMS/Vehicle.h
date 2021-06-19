@@ -40,6 +40,7 @@
 	Date get_date();
 	Feature* get_features();
 	Service** get_service_rec();
+	void print();
 	~Vehicle();
 };
 //add Complete Hierarchy of vehicles based on their types and functions

@@ -45,17 +45,14 @@
 	void Vehicle::set_vId(int vid)
 {
 	vId=vid;
-	
 }
 	void Vehicle::set_reg(int no)
 {
 	registrationNo=no;
-	
 }
 	void Vehicle::set_avg(float avg)
 {
 	avgMileage=avg;
-	
 }
 	void Vehicle::set_lics(char* lics)
 {
@@ -63,12 +60,10 @@
 		delete [] LicenceType;
 	LicenceType=new char [10];
 	strcpy(LicenceType,lics);
-	
 }
 	void Vehicle::set_status(bool status)
 {
 	this->status=status;
-	
 }
 	void Vehicle::set_fuel(char* fuel)
 {
@@ -76,17 +71,14 @@
 		delete [] fueltype;
 	fueltype=new char [10];
 	strcpy(fueltype,fuel);
-	
 }
 	void Vehicle::set_rank(float rank)
 {
 	overallRanking=rank;
-	
 }
 	void Vehicle::set_date(Date date)
 {
 	manufacturingDate=date;
-	
 }
 	void Vehicle::set_features(Feature* list)
 {
@@ -135,6 +127,22 @@
 	Service** Vehicle::get_service_rec()
 {
 	return serviceHistory;
+}
+	void Vehicle::print()
+{
+	cout<<endl<<"The Id of Vehicle is = "<<vId;
+	cout<<endl<<"The Registration No. of Vehicle is = "<<registrationNo;
+	cout<<endl<<"The Average Mileage of Vehicle is = "<<avgMileage;
+	cout<<endl<<"The The License Type of Vehicle is = "<<LicenceType;
+	cout<<endl<<"The Status of Vehicle is = ";
+	if(status)
+		cout<<"Complete Ride";
+	else
+		cout<<"Incomplete Ride";
+	cout<<endl<<"The Fuel Type of Vehicle is = "<<fueltype;
+	cout<<endl<<"The Overall Ranking of Vehicle is = "<<overallRanking;
+	cout<<endl<<"The Features of Vehicle are = "<<vId;
+	cout<<endl<<"The Service Record of Vehicle is = "<<vId;
 }
 	Vehicle::~Vehicle()
 {

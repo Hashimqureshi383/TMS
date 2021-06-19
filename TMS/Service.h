@@ -1,4 +1,6 @@
-#include"Info.h"	
+#pragma once
+#include"Info.h"
+#include<fstream>
 
 	class Service 
 {
@@ -38,7 +40,14 @@
 	int get_cId();
 	int get_dId();
 	int get_vId();
-	virtual void print()=0;
+	friend ostream & operator <<(ostream &,const Service &);
+	friend ofstream & operator <<(ofstream &,Service &);
+	friend istream & operator >>(istream &,Service &);
+	friend ifstream & operator >>(ifstream &,Service &);
+	void operator =(const Service &);
+	virtual void printf(ofstream &);
+	virtual void fin(ifstream &);
+	virtual void print();
 	~Service();
 };
 	class Ride:public Service 
@@ -56,6 +65,13 @@
 	void set_type(char*);
 	void set_d_rank(float);
 	void set_v_rank(float);
+	friend ostream& operator <<(ostream &,const Ride &);
+	friend ofstream& operator <<(ofstream &,Ride &);
+	friend istream& operator >>(istream &,Ride &);
+	friend ifstream& operator >>(ifstream &,Ride &);
+	Ride operator =(const Ride &);
+	void printf(ofstream &);
+	void fin(ifstream &);
 	void print();
 	~Ride();
 };
@@ -72,5 +88,13 @@
 	void set_g_type(char*);
 	float get_g_weight();
 	char* get_g_type();
+	friend ostream & operator <<(ostream &,const Delivery &);
+	friend ofstream & operator <<(ofstream &,Delivery &);
+	friend istream & operator >>(istream &,Delivery &);
+	friend ifstream & operator >>(ifstream &,Delivery &);
+	void printf(ofstream &);
+	void fin(ifstream &);
+	Delivery operator =(const Delivery &);
+	void print();
 	~Delivery();
 };

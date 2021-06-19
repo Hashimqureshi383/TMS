@@ -13,8 +13,10 @@
 }
 	Service::Service(char* source,char* destination,float distance,Date date,mTime time,bool status,float fuelrate,int cid,int did,int vid)
 {
-	this->source=source;
-	this->destination=destination;
+	this->source=new char [10];
+	strcpy(this->source,source);
+	this->destination=new char [10];
+	strcpy(this->destination,destination);
 	this->distance=distance;
 	this->status=status;
 	this->fuelrate=fuelrate;
@@ -26,8 +28,10 @@
 }
 	Service::Service(const Service &service)
 {
-	source=service.source;
-	destination=service.destination;
+	source=new char [10];
+	strcpy(source,service.source);
+	destination=new char [10];
+	strcpy(destination,service.destination);
 	distance=service.distance;
 	status=service.status;
 	fuelrate=service.fuelrate;
@@ -39,11 +43,17 @@
 }
 	void Service::set_source(char* source)
 {
-	this->source=source;
+	if(this->source!=0)
+		delete [] this->source;
+	this->source=new char [10];
+	strcpy(this->source,source);
 }
 	void Service::set_destination(char* destination)
 {
-	this->destination=destination;
+	if(this->destination!=0)
+		delete [] this->destination;
+	this->destination=new char [10];
+	strcpy(this->destination,destination);
 }
 	void Service::set_distance(float distance)
 {
@@ -117,6 +127,97 @@
 {
 	return vId;
 }
+	ostream & operator <<(ostream &out,const Service &service)
+{
+	out<<"The Source of Service is = "<<service.source<<endl;
+	out<<"The Dstination of Service is = "<<service.destination<<endl;
+	out<<"The Distance of Service is = "<<service.distance<<endl;
+	out<<"The Date of Service is = "<<service.bookingDate<<endl;
+	out<<"The Time of Service is = "<<service.bookingTime<<endl;
+	out<<"The Status of Service is = ";
+	if(service.status)
+		cout<<"Complete"<<endl;
+	else
+		cout<<"incomplete"<<endl;
+	out<<"The Fuel Rate of Service is = "<<service.fuelrate<<endl;
+	out<<"The Customer Id is = "<<service.cId;
+	out<<"The Driver Id is = "<<service.dId;
+	out<<"The Vehicle Id is = "<<service.vId;
+	return out;
+}	
+	ofstream & operator <<(ofstream &out,Service &service)
+{
+	out<<service.source<<endl;
+	out<<service.destination<<endl;
+	out<<service.distance<<endl;
+	out<<service.bookingDate<<endl;
+	out<<service.bookingTime<<endl;
+	out<<service.status<<endl;
+	out<<service.fuelrate<<endl;
+	out<<service.cId;
+	out<<service.dId;
+	out<<service.vId;
+	return out;
+}
+	istream & operator >>(istream &in,Service &service)
+{
+	in>>service.source;
+	in>>service.destination;
+	in>>service.distance;
+	in>>service.bookingDate;
+	in>>service.bookingTime;
+	in>>service.status;
+	in>>service.fuelrate;
+	in>>service.cId;
+	in>>service.dId;
+	in>>service.vId;
+	return in;
+}	
+	ifstream & operator >>(ifstream &in,Service &service)
+{
+	in>>service.source;
+	in>>service.destination;
+	in>>service.distance;
+	in>>service.bookingDate;
+	in>>service.bookingTime;
+	in>>service.status;
+	in>>service.fuelrate;
+	in>>service.cId;
+	in>>service.dId;
+	in>>service.vId;
+	return in;
+}
+	void Service::operator =(const Service &service1)
+{
+	if(source!=0)
+		delete [] source;
+	source=new char [10];
+	strcpy(source,service1.source);
+	if(destination!=0)
+		delete [] destination;
+	destination=new char [10];
+	strcpy(destination,service1.destination);
+	distance=service1.distance;
+	status=service1.status;
+	fuelrate=service1.fuelrate;
+	bookingDate=service1.bookingDate;
+	bookingTime=service1.bookingTime;
+	cId=service1.cId;
+	dId=service1.dId;
+	vId=service1.vId;
+}
+	void Service::printf(ofstream &out)
+{
+	out<<this;
+}
+	void Service::fin(ifstream &in)
+{
+	in>>*this;
+}
+	void Service::print()
+{
+	cout<<endl<<"The Service Information is given below "<<endl<<this;
+}
 	Service::~Service()
 {
 	if(source!=0)
@@ -166,12 +267,64 @@
 {
 	VehicleRanking=v_rank;
 }
+	ostream& operator <<(ostream &out,const Ride &ride)
+{
+	out<<endl<<"The No of Passengers is = "<<ride.noofPassengers;
+	out<<endl<<"The Type of Ride is = "<<ride.rideType;
+	out<<endl<<"The Ranking Of Driver is = "<<ride.DriverRanking;
+	out<<endl<<"The Ranking of Vehicle is = "<<ride.VehicleRanking;
+	return out;
+}	
+	ofstream& operator <<(ofstream &out,Ride &ride)
+{
+	out<<endl<<ride.noofPassengers;
+	out<<endl<<ride.rideType;
+	out<<endl<<ride.DriverRanking;
+	out<<endl<<ride.VehicleRanking;
+	return out;
+}
+	istream& operator >>(istream &in,Ride &ride)
+{
+	in>>ride.noofPassengers;
+	in>>ride.rideType;
+	in>>ride.DriverRanking;
+	in>>ride.VehicleRanking;
+	return in;
+}	
+	ifstream& operator >>(ifstream &in,Ride &ride)
+{
+	in>>ride.noofPassengers;
+	in>>ride.rideType;
+	in>>ride.DriverRanking;
+	in>>ride.VehicleRanking;
+	return in;
+}
+	Ride Ride::operator =(const Ride &ride)
+{
+	Service::operator=(ride);
+	noofPassengers=ride.noofPassengers;
+	if(rideType!=0)
+		delete [] rideType;
+	rideType=new char [10];
+	strcpy(rideType,ride.rideType);
+	DriverRanking=ride.DriverRanking;
+	VehicleRanking=ride.VehicleRanking;
+	return *this;
+}
+	void Ride::printf(ofstream &out)
+{
+	Service::printf(out);
+	out<<this;
+}
+	void Service::fin(ifstream &in)
+{
+	Service::fin(in);
+	in>>*this;
+}
 	void Ride::print()
 {
-	cout<<endl<<"The No of Passengers is = "<<noofPassengers;
-	cout<<endl<<"The Type of Ride is = "<<rideType;
-	cout<<endl<<"The Ranking Of Driver is = "<<DriverRanking;
-	cout<<endl<<"The Ranking of Vehicle is = "<<VehicleRanking;
+	Service::print();
+	cout<<endl<<"The Ride Information is given below "<<this;
 }
 	Ride::~Ride()
 {
@@ -211,6 +364,48 @@
 	char* Delivery::get_g_type()
 {
 	return goodsType;
+}
+	ostream & operator <<(ostream &out,const Delivery &delivery)
+{
+	out<<"The Weight of Goods is = "<<delivery.goodsWeight;
+	out<<"The Type of Goods is = "<<delivery.goodsType;
+	return out;
+}	
+	ofstream & operator <<(ofstream &out,Delivery &delivery)
+{
+	out<<delivery.goodsWeight;
+	out<<delivery.goodsType;
+	return out;
+}
+	istream & operator >>(istream &in,Delivery &delivery)
+{
+	in>>delivery.goodsWeight;
+	in>>delivery.goodsType;
+	return in;
+}
+	void Delivery::printf(ofstream &out)
+{
+	Service::printf(out);
+	out<<this;
+}	
+	void Delivery::fin(ifstream &in)
+{
+	Service::fin(in);
+	in>>*this;
+}
+	Delivery Delivery::operator =(const Delivery &delivery)
+{
+	goodsWeight=delivery.goodsWeight;
+	if(goodsType!=0)
+		delete [] goodsType;
+	goodsType=new char [10];
+	strcpy(goodsType,delivery.goodsType);
+	return *this;
+}
+	void Delivery::print()
+{
+	Service::print();
+	cout<<endl<<"The Delivery Information is given below "<<this;
 }
 	Delivery::~Delivery()
 {
