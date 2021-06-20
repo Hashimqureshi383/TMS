@@ -142,9 +142,11 @@
     <ClInclude Include="Info.h" />
     <ClInclude Include="Person.h" />
     <ClInclude Include="Service.h" />
+    <ClInclude Include="TMS.h" />
     <ClInclude Include="Vehicle.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="TMS.cpp" />
     <ClCompile Include="Vehicle.cpp" />
     <ClCompile Include="Service.cpp" />
   </ItemGroup>

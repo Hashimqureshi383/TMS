@@ -383,6 +383,12 @@
 	in>>delivery.goodsType;
 	return in;
 }
+	ifstream & operator >>(ifstream &in,Delivery &delivery)
+{
+	in>>delivery.goodsWeight;
+	in>>delivery.goodsType;
+	return in;
+}
 	void Delivery::printf(ofstream &out)
 {
 	Service::printf(out);
