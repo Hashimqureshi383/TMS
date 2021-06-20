@@ -41,5 +41,8 @@
     <ClCompile Include="TMS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TMS System.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

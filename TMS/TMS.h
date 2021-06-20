@@ -1,3 +1,4 @@
+#pragma once
 #include"Person.h"
 #include"Vehicle.h"
 
@@ -40,7 +41,7 @@
 	bool update_driver_service(string,int);
 	bool add_customer(Customer &);
 	bool add_driver(Driver &);
-	bool remove_driver(const Driver &);
+	bool remove_driver(Driver &);
 	bool add_vehicle(Vehicle &);
 	bool remove_vehicle(Vehicle &);
 	void print_customers();
@@ -57,8 +58,9 @@
 	void complete_ride(Service &);
 	void print_same_vehicle_customers();
 	void print_same_date_drivers();
-	void print_date_pending_services(const Date &);
+	void print_date_pending_services(Date &);
 	void print_driver_pending_services(int);
 	void print_cancelled_services(int);
+	void menu();
 	~TMS();
 };

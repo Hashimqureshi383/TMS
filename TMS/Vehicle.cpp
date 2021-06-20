@@ -80,13 +80,33 @@
 {
 	manufacturingDate=date;
 }
-	void Vehicle::set_features(Feature* list)
+	void Vehicle::set_features(Feature* list,int size)
 {
-	this->list=list;
+	int index=0;
+	if(this->list!=0)
+		delete [] this->list;
+	f_size=size;
+	this->list=new Feature [f_size];
+	for(index=0;index<f_size;index++)
+	{
+		*(this->list+index)=*(list+index);
+	}
 }
-	void Vehicle::set_service_rec(Service** rec)
+	void Vehicle::set_service_rec(Service** rec,int size)
 {
-	serviceHistory=rec;
+	int index=0;
+	if(serviceHistory!=0)
+	{ 
+		for(index=0;index<s_size;index++)
+			delete [] *(serviceHistory+index);
+		delete serviceHistory;
+	}
+	s_size=size;
+	serviceHistory=new Service* [s_size];
+	for(index=0;index<s_size;index++)
+	{
+		*(serviceHistory+index)=*(rec+index);
+	}
 }
 	int Vehicle::get_vId()
 {
@@ -128,21 +148,94 @@
 {
 	return serviceHistory;
 }
+	ostream& operator <<(ostream &out, const Vehicle &vehicle)
+{
+	int index=0;
+	out<<endl<<"The Id of Vehicle is = "<<vehicle.vId;
+	out<<endl<<"The Registration No. of Vehicle is = "<<vehicle.registrationNo;
+	out<<endl<<"The Average Mileage of Vehicle is = "<<vehicle.avgMileage;
+	out<<endl<<"The The License Type of Vehicle is = "<<vehicle.LicenceType;
+	out<<endl<<"The Status of Vehicle is = ";
+	if(vehicle.status)
+		out<<"Complete Ride";
+	else
+		out<<"Incomplete Ride";
+	out<<endl<<"The Fuel Type of Vehicle is = "<<vehicle.fueltype;
+	out<<endl<<"The Overall Ranking of Vehicle is = "<<vehicle.overallRanking;
+	out<<endl<<"The Features of Vehicle are = ";
+	for(index=0;index<vehicle.f_size;index++)
+	{
+		cout<<*(vehicle.list+index);
+	}
+	out<<endl<<"The Service Record of Vehicle is = ";
+	for(index=0;index<vehicle.s_size;index++)
+	{
+		cout<<**(vehicle.serviceHistory+index);
+	}
+	return out;
+}
+	istream & operator >>(istream &in, Vehicle &vehicle)
+{
+	int index=0;
+	in>>vehicle.vId;
+	in>>vehicle.registrationNo;
+	in>>vehicle.avgMileage;
+	in>>vehicle.LicenceType;
+	in>>vehicle.status;
+	in>>vehicle.fueltype;
+	in>>vehicle.overallRanking;
+	for(index=0;index<vehicle.f_size;index++)
+	{
+		in>>*(vehicle.list+index);
+	}
+	for(index=0;index<vehicle.s_size;index++)
+	{
+		in>>**(vehicle.serviceHistory+index);
+	}
+}
+	ofstream & operator <<(ofstream &out, const Vehicle &vehicle)
+{
+	int index=0;
+	out<<vehicle.vId;
+	out<<vehicle.registrationNo;
+	out<<vehicle.avgMileage;
+	out<<vehicle.LicenceType;
+	out<<vehicle.status;
+	out<<vehicle.fueltype;
+	out<<vehicle.overallRanking;
+	for(index=0;index<vehicle.f_size;index++)
+	{
+		out<<*(vehicle.list+index);
+	}
+	for(index=0;index<vehicle.s_size;index++)
+	{
+		out<<**(vehicle.serviceHistory+index);
+	}
+	return;
+}
+	ifstream & operator >>(ifstream &in, Vehicle &vehicle)
+{
+	int index=0;
+	in>>vehicle.vId;
+	in>>vehicle.registrationNo;
+	in>>vehicle.avgMileage;
+	in>>vehicle.LicenceType;
+	in>>vehicle.status;
+	in>>vehicle.fueltype;
+	in>>vehicle.overallRanking;
+	for(index=0;index<vehicle.f_size;index++)
+	{
+		in>>*(vehicle.list+index);
+	}
+	for(index=0;index<vehicle.s_size;index++)
+	{
+		in>>**(vehicle.serviceHistory+index);
+	}
+	return in;
+}
 	void Vehicle::print()
 {
-	cout<<endl<<"The Id of Vehicle is = "<<vId;
-	cout<<endl<<"The Registration No. of Vehicle is = "<<registrationNo;
-	cout<<endl<<"The Average Mileage of Vehicle is = "<<avgMileage;
-	cout<<endl<<"The The License Type of Vehicle is = "<<LicenceType;
-	cout<<endl<<"The Status of Vehicle is = ";
-	if(status)
-		cout<<"Complete Ride";
-	else
-		cout<<"Incomplete Ride";
-	cout<<endl<<"The Fuel Type of Vehicle is = "<<fueltype;
-	cout<<endl<<"The Overall Ranking of Vehicle is = "<<overallRanking;
-	cout<<endl<<"The Features of Vehicle are = "<<vId;
-	cout<<endl<<"The Service Record of Vehicle is = "<<vId;
+	
 }
 	Vehicle::~Vehicle()
 {

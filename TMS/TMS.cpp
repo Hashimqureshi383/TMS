@@ -64,7 +64,7 @@
 	{
 		*(vehicles+index)=new Vehicle;
 	}
-	s_size=tms.s_sizesize;
+	s_size=tms.s_size;
 	services=new Service* [s_size];
 	for(index=0;index<s_size;index++)
 	{
@@ -112,6 +112,30 @@
 		*(services+index)=new Service;
 		**(services+index)=**(service+index);
 	}
+}
+	void TMS::set_d_size(int size)
+{
+	d_size=size;
+}
+	void TMS::set_c_size(int size)
+{
+	c_size=size;
+}
+	void TMS::set_v_size(int size)
+{
+	v_size=size;
+}
+	int TMS::get_d_size()
+{
+	return d_size;
+}
+	int TMS::get_c_size()
+{
+	return c_size;
+}
+	int TMS::get_v_size()
+{
+	return v_size;
 }
 	Driver** TMS::get_drivers()
 {
@@ -354,7 +378,7 @@
 	else 
 		return false;
 }
-	bool TMS::remove_driver(const Driver &driver)
+	bool TMS::remove_driver(Driver &driver)
 {
 	if(d_size>0)
 	{ 
@@ -583,7 +607,10 @@
 {
 	
 }
-	void TMS::complete_ride(Service &);
+	void TMS::complete_ride(Service &)
+{
+
+}
 	void TMS::print_same_vehicle_customers()
 {
 	int index=0;
@@ -604,7 +631,7 @@
 {
 
 }
-	void TMS::print_date_pending_services(const Date &date)
+	void TMS::print_date_pending_services(Date &date)
 {
 	int index=0;
 	for(index=0;index<s_size;index++)
@@ -636,6 +663,36 @@
 			cout<<*(*(c_services+index));
 		}
 	}
+}
+	void TMS::menu()
+{
+	cout<<"1. Add a new Customer "<<endl;
+	cout<<"2. Add or remove a Driver "<<endl;
+	cout<<"3. Add or remove a Vehicle "<<endl;
+	cout<<"4. Print List of All Customers"<<endl;
+	cout<<"5. Print List of All drivers"<<endl;
+	cout<<"6. Print complete list of vehicles with details by their category."<<endl;
+	cout<<"7. Print complete details and service history of a particular vehicle, (Provide vehicle ID)"<<endl;
+	cout<<"8. Print complete history of a particular customer, (Provide customer ID)"<<endl;
+	cout<<"9. Print complete history of a driver including services. (Provide driver ID)"<<endl;
+	cout<<"10. Print list of all drivers who have ranking above 4.5."<<endl;
+	cout<<"11. Print list of all drivers who have multiple licenses and their license information too."<<endl;
+	cout<<"12. Print updated salary of all drivers based on their updated ranking."<<endl;
+	cout<<"13. Add a Service request (ride or delivery) for a customer. Customer will be provided with a list"; 
+	cout<<"of free vehicles and drivers to choose based on their ranking in descending order. The fair for ";
+	cout<<"the service should be calculated and displayed to the user."<<endl;
+	cout<<"14. When the customer cancels a booking, he will be charged 5% of service fair cost on"; 
+	cout<<"cancelation. (Provide service and customer ID). The driver and vehicle status should be ";
+	cout<<"updated after cancelation and no record of service should be added in driver and vehicle, but"; 
+	cout<<"customer bookings list should be updated."<<endl;
+	cout<<"15. Complete a service (Provide service ID). Update Customer, Driver’s, and vehicles service";
+	cout<<"record once a service status is completed, and keep that service in Services list too. Customer";	 
+	cout<<"should add ranking of a driver and vehicle for a service after completion."<<endl;
+	cout<<"16. Print details of all Customers, who used the same vehicle in a ride service on a different date."<<endl;
+	cout<<"17. Print the List of all Drivers who completed delivery services on same days."<<endl;
+	cout<<"18. Print details of all pending services on a particular date."<<endl;
+	cout<<"19. Print details of all pending services of a particular driver."<<endl;
+	cout<<"20. Print details of all canceled services by a customer."<<endl;
 }
 	TMS::~TMS()
 {

@@ -12,7 +12,9 @@
 	float overallRanking;
 	Date manufacturingDate;
 	Feature * list;
+	int f_size;
 	Service ** serviceHistory;
+	int s_size;
 	//Add services address in the array for tracking complete information of service.
 	//you can add more members here if required
 	//add member functions
@@ -28,8 +30,8 @@
 	void set_fuel(char*);
 	void set_rank(float);
 	void set_date(Date);
-	void set_features(Feature*);
-	void set_service_rec(Service**);
+	void set_features(Feature*,int);
+	void set_service_rec(Service**,int);
 	int get_vId();
 	int get_reg();
 	float get_avg();
@@ -40,6 +42,10 @@
 	Date get_date();
 	Feature* get_features();
 	Service** get_service_rec();
+	friend ostream & operator <<(ostream &,const Vehicle &);
+	friend istream & operator >>(istream &,Vehicle &);
+	friend ofstream & operator <<(ofstream &,const Vehicle &);
+	friend ifstream & operator >>(ifstream &,Vehicle &);
 	void print();
 	~Vehicle();
 };

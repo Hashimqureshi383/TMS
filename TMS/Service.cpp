@@ -316,7 +316,7 @@
 	Service::printf(out);
 	out<<this;
 }
-	void Service::fin(ifstream &in)
+	void Ride::fin(ifstream &in)
 {
 	Service::fin(in);
 	in>>*this;
